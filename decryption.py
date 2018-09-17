@@ -14,11 +14,10 @@ if  __name__ == "__main__":
 
     server = us.UdpServer(host, port)
 
-    address = ("127.0.0.1", 5000)
-    data = "This is the message being sent!"
-    sent = server.send(data, address)
-    print("Returned data to sender")    
+    while True:
+        data, address = server.recv()
+        print("Received {0} bytes from {1}. Printing:\n{2}".format(len(data), address, data))
 
-    data, address = server.recv()
-    print("Received {0} bytes from {1}".format(len(data), address))
-
+        if data:
+            sent = server.send(data.upper(), address)
+            print("Returned data to sender")
