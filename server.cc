@@ -34,7 +34,7 @@ int main(int argc, char** argv) {
     std::cout << "Fail\n";
 
   // test a string
-  std::cout << "Testing a human-readable string:\n";
+  std::cout << "\n\nTesting a human-readable string:\n";
   std::string plaintext = "This is a secret message.";
 
   std::string encrypted_string = "";
@@ -45,7 +45,7 @@ int main(int argc, char** argv) {
   for (char c : encrypted_string)
     decrypted_string += cipher.decrypt(c);
 
-  std::cout << "\n\nPlaintext: " << plaintext << "\n";
+  std::cout << "Plaintext: " << plaintext << "\n";
   std::cout << "Encrypted: " << encrypted_string << "\n";
   std::cout << "Decrypted: " << decrypted_string << "\n";
 
@@ -54,7 +54,7 @@ int main(int argc, char** argv) {
     std::cout << "Correct!\n";
   else
     std::cout << "Fail\n";
-  std::cout << "Finished unit tests.\n";
+  std::cout << "Finished unit tests.\n\n\n";
   // UNIT TESTS ---------------------------------------------------------------
 
 
