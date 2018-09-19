@@ -4,27 +4,28 @@
 #include "udp_server.h"
 
 int main(int argc, char** argv) {
-  if (argc != 3) {
-    std::cerr << "ERROR: Invalid argument(s)\nUSAGE: " << argv[0] 
-              << "<host> <port>";
-    return EXIT_FAILURE;
-  }
+  // if (argc != 3) {
+  //   std::cerr << "ERROR: Invalid argument(s)\nUSAGE: " << argv[0] 
+  //             << "<host> <port>";
+  //   return EXIT_FAILURE;
+  // }
 
-  std::string host = argv[1];
-  int port = atoi(argv[2]);
+  std::string host = "127.0.0.1";
+  int port = 5000;
 
   UDP::Server server(host, port);
-  std::string buffer;
-
-
   DES::Cipher cipher;
 
+  // UNIT TESTS ---------------------------------------------------------------
+  std::cout << "Running two unit tests...\n\n";
+  
   // test a single byte
+  std::cout << "Testing a single byte:\n";
   uint16_t plain = 0xa4;
-  std::cout << "Plaintext: " << plain << "\n";
   uint16_t encrypted = cipher.encrypt(plain);
-  std::cout << "Encrypted: " << encrypted << "\n";
   uint16_t result = cipher.decrypt(encrypted);
+  std::cout << "Plaintext: " << plain << "\n";
+  std::cout << "Encrypted: " << encrypted << "\n";
   std::cout << "Decrypted: " << result << "\n";
   
   if (plain == result)
@@ -33,18 +34,19 @@ int main(int argc, char** argv) {
     std::cout << "Fail\n";
 
   // test a string
+  std::cout << "Testing a human-readable string:\n";
   std::string plaintext = "This is a secret message.";
-  std::cout << "\n\nPlaintext: " << plaintext << "\n";
+
   std::string encrypted_string = "";
   for (char c : plaintext)
     encrypted_string += cipher.encrypt(c);
-
-  std::cout << "Encrypted: " << encrypted_string << "\n";
 
   std::string decrypted_string = "";
   for (char c : encrypted_string)
     decrypted_string += cipher.decrypt(c);
 
+  std::cout << "\n\nPlaintext: " << plaintext << "\n";
+  std::cout << "Encrypted: " << encrypted_string << "\n";
   std::cout << "Decrypted: " << decrypted_string << "\n";
 
 
@@ -52,13 +54,20 @@ int main(int argc, char** argv) {
     std::cout << "Correct!\n";
   else
     std::cout << "Fail\n";
+  std::cout << "Finished unit tests.\n";
+  // UNIT TESTS ---------------------------------------------------------------
 
 
-  // while (true) {
-  //   server.receive(buffer);
-  //   std::cout << "Received " << buffer << std::endl;
-  // }
+  // run the server
+  std::string buffer;
+  server.receive(buffer);
+  std::cout << "Received encrypted message: " << buffer << "\nDecrypting...\n";
 
+  std::string decrypted = "";
+  for (char c : buffer)
+    decrypted += cipher.decrypt(c);
+
+  std::cout << "\nThe decrypted message is: " << decrypted << std::endl;
 
   return EXIT_SUCCESS;
 }

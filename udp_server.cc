@@ -49,6 +49,29 @@ void Server::receive(std::string& return_buffer) {
     return_buffer = buffer;
   }
 }
+
+// ----------------------------------------------------------------------------
+void Server::send(const std::string& server_ip, int server_port, const std::string& buffer) {
+  struct sockaddr_in server;
+  struct hostent * hp;
+  server.sin_family = AF_INET;
+
+  if ((hp = gethostbyname(server_ip.c_str())) == NULL) {
+    std::cerr << "ERROR: " << strerror(errno) << "\ngethostbyname() failed" << std::endl;
+  }
+
+  memcpy(&server.sin_addr.s_addr, hp->h_addr, hp->h_length);
+
+  // establish the server port number - we must use network byte order!
+  server.sin_port = htons(server_port);
+
+  // send it to the echo server
+  int n_sent = sendto(this->sd_, buffer.c_str(), buffer.size(), 0, (struct sockaddr* )&server, sizeof server);
+
+  if (n_sent < 0) {
+    std::cerr << "ERROR: " << strerror(errno) << "\nsendto() failed" << std::endl;
+  }
+}
     
 
 

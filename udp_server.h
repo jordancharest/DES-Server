@@ -3,6 +3,7 @@
 
 
 #include <arpa/inet.h>
+#include <netdb.h>
 #include <sys/socket.h>
 #include <sys/types.h>
 #include <unistd.h>
@@ -27,6 +28,8 @@ class Server {
 
   // member functions
   void receive(std::string& return_buffer);
+  void send(const std::string& server_ip, int server_port, const std::string& buffer);
+
 
 
 
