@@ -21,12 +21,10 @@ void Cipher::generateSubkeys() {
                     | ((this->key & 0x00000200) >> 6)
                     | ((this->key & 0x00000010) >> 4)
                     | ((this->key & 0x00000144) >> 1);
-  std::cout << std::hex << permuted << std::endl;
 
   // mask the permuted key to get the left and right halves
   uint16_t left = (permuted & (0x1F << 5)) >> 5;
   uint16_t right = permuted & 0x1F;
-  std::cout << "Left: " << left << "   Right: " << right  << "\n" << std::endl;
 
   // left shift left half
   uint16_t carry = left & 0x10;
@@ -54,7 +52,6 @@ void Cipher::generateSubkeys() {
   
   // strip off the two most significant bits to truncate 10 bits to 8
   this->key1 &= 0x0FF;
-  std::cout << "Key1: " << this->key1 << std::endl;
 
   // left shift the left and right halves again
   carry = left & 0x10;
@@ -79,7 +76,6 @@ void Cipher::generateSubkeys() {
 
   // strip off the two most significant bits to truncate 10 bits to 8
   this->key2 &= 0x0FF;
-  std::cout << "Key2: " << this->key2 << std::endl;
 }
 
 // ----------------------------------------------------------------------------
