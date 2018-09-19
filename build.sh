@@ -1,0 +1,1 @@
+g++ udp* des* server2.cc -O3 -std=c++14 -o server2 && g++ udp* des* server.cc -O3 -std=c++14 -o server1
