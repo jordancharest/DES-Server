@@ -1,5 +1,7 @@
 # Data Encryption Standard
-This is a toy implementation of the Data Encryption Standard with two rounds, 8-bit blocks and a 10-bit key. To test it out, you will need C++14.
+This is a toy implementation of the Data Encryption Standard with two rounds, 8-bit blocks and a 10-bit key. To test it out, you will need C++14. I approached the problem from an object oriented perspective, so I implemented ```Cipher``` class that stores the S-boxes and the key and the methods to encrypt and decrypt a byte. Upon instantiation, the 8-bit subkeys are generated from the 10-bit key using circular left bit shifts and some bit permutations and then stored as data members.
+
+The encrypt method accepts a single byte, runs that byte through the encryption algorithm, which includes a bit permutation, two rounds of F-function (S-boxes) confusion, the first of which uses subkey 1 and the second uses subkey 2. A reverse bit permutation is done at the end, and finally the encrypted byte is returned. The decrypt method, of course, operates in the same exact way, since DES is a symmetric encryption algorithm, however it runs in reverse, so subkey 2 is used before subkey 1.
 
 ## Instructions
 Clone the repo and run:
