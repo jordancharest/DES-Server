@@ -5,10 +5,14 @@ The encrypt method accepts a single byte, runs that byte through the encryption 
 
 ## Instructions
 Clone the repo and run:
-```./build.sh```
+
+```
+./build.sh
+```
 
 This will build two separate executables, one for each server. To run, run the following commands in two separate processes:
-```./server1
+```
+./server1
 ./server2 <text file>
 ```
 
