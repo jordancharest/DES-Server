@@ -36,16 +36,16 @@ Finished unit tests.
 
 
 Received datagram from: 127.0.0.1
-Received encrypted message: Z)՘)gu&u|+&&))g&a
+Received encrypted message: Z)՘)gu&u|+&&))g&)&u|egue&|)&|&|a
 Decrypting...
 
-The decrypted message is: This is an encrypted message.
+The decrypted message is: This is an encrypted message sent from another server.
 ```
 
 From Server 2:
 ```
-Client wishes to send: This is an encrypted message.
+Client wishes to send: This is an encrypted message sent from another server.
 Encrypting...
-Sending encrypted result: Z)՘)gu&u|+&&))g&a
+Sending encrypted result: Z)՘)gu&u|+&&))g&)&u|egue&|)&|&|a
 ```
 
