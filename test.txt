@@ -1,1 +1,1 @@
-This is an encrypted message.
+This is an encrypted message sent from another server.
